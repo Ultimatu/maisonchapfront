@@ -1,0 +1,46 @@
+.navbar-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(33, 16, 16, 0.5);
+}
+
+.nav-link:hover {
+  border-bottom: 2px solid #800505;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-link.active {
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+  font-family: 'Lobster', cursive;
+  border-bottom: 2px solid #800505;
+}
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+  font-size: 1.5em;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 0;
+}
+
+.dropdown-item {
+  font-size: 1.1em;
+}
+.dropdown-item:hover {
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+  font-family: 'Lobster', cursive;
+}
+.fs-2 {
+  font-size: 1.5em !important;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(33, 16, 16, 0.5);
+  font-family: 'Lobster', cursive;
+}

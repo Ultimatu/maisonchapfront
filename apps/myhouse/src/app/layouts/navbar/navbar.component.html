@@ -1,0 +1,47 @@
+<div class="container-fluid bg-dark">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" style="min-height:80px">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-white text-decoration-none">
+      <img ngSrc="assets/maison/logo_img.png" class="bi me-2" width="40" height="32" role="img" alt="">
+      <span class="fs-4">Maison Chap</span>
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle px-2 link-light"
+          href="#"
+          id="categoriesDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Catégories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+          <a class="dropdown-item" routerLink="/categories/maison"
+          >Logement</a
+          >
+          <a class="dropdown-item" routerLink="/categories/terrain"
+          >Terrain</a
+          >
+          <a class="dropdown-item" routerLink="/categories/studio">Studio</a>
+          <a class="dropdown-item" routerLink="/categories/villa">Villa</a>
+        </div>
+      </li>
+
+      <li><a href="#" class="nav-link px-2 link-light">Location</a></li>
+      <li><a href="#" class="nav-link px-2 link-light">Vente</a></li>
+      <li><a href="#" class="nav-link px-2 link-light">About</a></li>
+    </ul>
+
+    <div class="col-md-3 text-end" *ngIf="!isAuthenticated()">
+      <button mat-raised-button type="button" class="btn btn-outline-light me-2" routerLink="/login">Login </button>
+      <button type="button" class="btn btn-warning">Sign-up</button>
+    </div>
+    <div class="col-md-3 text-end" *ngIf="isAuthenticated()">
+        <button type="button" mat-raised-button color="primary" routerLink="/profile">Profile</button>
+      <button type="button" mat-raised-button color="warn" (click)="logout()">Logout</button>
+    </div>
+  </header>
+</div>
