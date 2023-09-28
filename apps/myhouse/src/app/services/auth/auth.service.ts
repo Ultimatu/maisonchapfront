@@ -105,10 +105,12 @@ export class AuthServerProvider {
             this.sessionStorageService.clear('authenticationToken');
             this.sessionStorageService.clear('refreshToken');
         } else {
-            this.sessionStorageService.store('authenticationToken', jwt)
-            this.sessionStorageService.store('refreshToken', response.refresh_token);
-            this.localStorageService.clear('authenticationToken');
-            this.localStorageService.clear('refreshToken');
+            this.localStorageService.store('authenticationToken', jwt)
+            console.log("token stored");
+            this.localStorageService.store('refreshToken', response.refresh_token);
+            console.log("refresh token stored");
+            this.sessionStorageService.clear('authenticationToken');
+            this.sessionStorageService.clear('refreshToken');
         }
         const storedDate: Date | null = this.localStorageService.retrieve('storedDate');
         if (storedDate === null) {

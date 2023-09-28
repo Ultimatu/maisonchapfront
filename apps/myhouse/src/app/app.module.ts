@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +26,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import {FooterComponent} from "./layouts/footer/footer.component";
 import { HouseComponent } from './component/house/house.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import {TagModule} from "primeng/tag";
 import {RatingModule} from "primeng/rating";
 import { AddressFormComponent } from './component/address-form/address-form.component';
@@ -34,11 +34,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import {SearchbarComponent} from "./shared/searchbar/searchbar.component";
-import {AccountService} from "./services/auth/account.service";
-import {AuthServerProvider} from "./services/auth/auth.service";
-import {LoginService} from "./login/login.service";
-import {LocalStorageService, NgxWebstorageModule, SessionStorageService} from "ngx-webstorage";
-import {LoginComponent} from "./login/login.component";
+import { NgxWebstorageModule} from "ngx-webstorage";
+import {httpInterceptorProviders} from "./services/interceptor";
+import {SharedLibsModule} from "./shared/shared-libs.module";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -53,11 +53,11 @@ import {LoginComponent} from "./login/login.component";
     HouseComponent,
     AddressFormComponent,
     SearchbarComponent,
-    LoginComponent, FormGroupComponent
+    FormGroupComponent
   ],
   imports: [
     BrowserModule,
-    NgxWebstorageModule.forRoot(),
+    NgxWebstorageModule.forRoot({prefix: 'app', separator: '-', caseSensitive: true}),
     AppRoutingModule,
     ButtonModule,
     DropdownModule,
@@ -67,7 +67,6 @@ import {LoginComponent} from "./login/login.component";
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatButtonModule,
     MatToolbarModule,
     CarouselModule,
     MatMenuModule,
@@ -84,12 +83,17 @@ import {LoginComponent} from "./login/login.component";
     MatCardModule,
     ReactiveFormsModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    SharedLibsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
-    SessionStorageService,
-    LocalStorageService,
-    LoginService, AccountService, AuthServerProvider
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 

@@ -1,1 +1,8 @@
-<p>error works!</p>
+<h2 mat-dialog-title>Erreur d'authentification</h2>
+<mat-dialog-content>
+  <mat-icon>{{ data.icon }}</mat-icon>
+  <p>{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="'close'">Fermer</button>
+</mat-dialog-actions>

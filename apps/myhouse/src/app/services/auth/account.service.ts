@@ -71,7 +71,7 @@ export class AccountService {
     return this.authenticationState.asObservable();
   }
 
-  private fetch(): Observable<Account> {
+  fetch(): Observable<Account> {
 
     return this.http.get<Account>(USER_BASE_URL+"/my-details");
   }
@@ -82,6 +82,18 @@ export class AccountService {
       this.stateStorageService.clearUrl();
       this.router.navigateByUrl(previousUrl).then(r => {});
     }
+  }
+
+  getMyDatas(): Observable<Account | null> {
+    return this.fetch().pipe(
+      tap((userData) => {
+        console.log(userData);
+      }),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
   }
 
 }

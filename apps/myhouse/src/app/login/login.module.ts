@@ -1,4 +1,3 @@
-/*
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -8,6 +7,9 @@ import { LoginComponent } from './login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {NgIf} from "@angular/common";
 
 @NgModule({
   imports: [
@@ -15,14 +17,15 @@ import {MatInputModule} from "@angular/material/input";
     SharedModule,
     ReactiveFormsModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    NgIf
+
   ],
   declarations: [LoginComponent],
   exports: [
-
-    LoginComponent,
-
+    LoginComponent
   ]
 })
 export class LoginModule {}
-*/
