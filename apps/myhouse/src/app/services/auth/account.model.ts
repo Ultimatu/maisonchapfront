@@ -15,6 +15,11 @@ export class Account {
     public credentialsNonExpired: boolean,
     public accountNonLocked: boolean,
     public id: number | null,
-    public authorities: string[],
+    public authorities: Authority[]
   ) {}
+}
+
+
+export interface Authority {
+  authority: string;
 }

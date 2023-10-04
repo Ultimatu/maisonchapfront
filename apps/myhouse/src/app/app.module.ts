@@ -1,6 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
+import { DataViewModule } from 'primeng/dataview';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DropdownModule } from 'primeng/dropdown';
@@ -37,65 +37,76 @@ import {SearchbarComponent} from "./shared/searchbar/searchbar.component";
 import { NgxWebstorageModule} from "ngx-webstorage";
 import {httpInterceptorProviders} from "./services/interceptor";
 import {SharedLibsModule} from "./shared/shared-libs.module";
-import {MatCheckboxModule} from "@angular/material/checkbox";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import {MatDialogModule} from "@angular/material/dialog";
+import { LogoutComponent } from './component/logout/logout.component';
+import { HouseDetailComponent } from './component/house-detail/house-detail.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        FooterComponent,
+        SwipperComponent,
+        ErrorComponent,
+        MainComponent,
+        ProfilesComponent,
+        FooterComponent,
+        HouseComponent,
+        AddressFormComponent,
+        SearchbarComponent,
+        FormGroupComponent,
+        LogoutComponent,
+        HouseDetailComponent
+    ],
+    imports: [
+        BrowserModule,
+        NgxWebstorageModule.forRoot({prefix: 'app', separator: '-', caseSensitive: true}),
+        AppRoutingModule,
+        ButtonModule,
+        DropdownModule,
+        MenuModule,
+        BrowserAnimationsModule,
+        NgOptimizedImage,
+        MatInputModule,
+        FormsModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatToolbarModule,
+        CarouselModule,
+        MatMenuModule,
+        MatChipsModule,
+        MatSidenavModule,
+        MatListModule,
+        HttpClientModule,
+        DataViewModule,
+        TagModule,
+        RatingModule,
+        FormsModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatRadioModule,
+        MatInputModule,
+        SharedLibsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        MatButtonModule
+    ],
+    providers: [
+        httpInterceptorProviders
+    ],
+  exports: [
     NavbarComponent,
-    FooterComponent,
-    SwipperComponent,
-    ErrorComponent,
-    MainComponent,
-    ProfilesComponent,
-    FooterComponent,
-    HouseComponent,
-    AddressFormComponent,
-    SearchbarComponent,
-    FormGroupComponent
+    FooterComponent
   ],
-  imports: [
-    BrowserModule,
-    NgxWebstorageModule.forRoot({prefix: 'app', separator: '-', caseSensitive: true}),
-    AppRoutingModule,
-    ButtonModule,
-    DropdownModule,
-    MenuModule,
-    BrowserAnimationsModule,
-    NgOptimizedImage,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatToolbarModule,
-    CarouselModule,
-    MatMenuModule,
-    MatChipsModule,
-    MatSidenavModule,
-    MatListModule,
-    HttpClientModule,
-    DataViewModule,
-    TagModule,
-    RatingModule,
-    FormsModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatRadioModule,
-    MatInputModule,
-    SharedLibsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
-  ],
-  providers: [
-    httpInterceptorProviders
-  ],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 
 })
 export class AppModule {}

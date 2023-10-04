@@ -1,1 +1,65 @@
-<p>account works!</p>
+<div class="container-fluid bg-dark">
+  <header class="d-flex flex-wrap align-items-center justify-content-center mt-1 py-3 mb-4 border-bottom" style="min-height:100px">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-white text-decoration-none" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <img src="assets/maison/logo_img.png" class="bi me-2" width="40" height="32" role="img" alt="">
+      <span class="fs-4">Maison Chap</span>
+    </a>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <li><a mat-raised-button color="basic" href="/" class="nav-link link-light fs-2">Home</a></li>
+    </ul>
+
+
+  </header>
+</div>
+
+<div class="container" style="min-height: 60vh;">
+  <div class="row">
+    <h2 class="fs-2"> S'inscrire en tant que :</h2>
+    <div class="col-6" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <a  class="card-link" [routerLink]="['/account/register', 'researcher']">
+      <div class="card text-center" style="min-height: 20vh; padding: 20px;">
+        <iframe src="https://lottie.host/?file=d6566041-8324-488b-9e66-b8ff5ea11c62/lTnNreHFoy.json"></iframe>
+        <div class="card-body">
+          Chercheur de propriété
+        </div>
+      </div>
+      </a>
+    </div>
+
+    <div class="col-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <a class="card-link" [routerLink]="['/account/register', 'promoteur']">
+      <div class="card text-center" style="min-height: 20vh; padding: 20px;">
+        <iframe src="https://lottie.host/?file=724ad26e-937b-48c6-baa4-9fb1aa22f68d/J8aN2VEE2s.json"></iframe>
+        <div class="card-body">
+          Promoteur immobilier
+        </div>
+      </div>
+      </a>
+    </div>
+
+    <div class="col-6" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <a class="card-link" [routerLink]="['/account/register', 'owner']">
+      <div class="card text-center" style="min-height: 20vh; padding: 20px;">
+        <iframe src="https://lottie.host/?file=1426906a-dd99-4fbc-bc0e-1ba1fc0f4f2d/raehgJKyHD.json"></iframe>
+        <div class="card-body">
+          Propriétaire de Maison
+        </div>
+      </div>
+      </a>
+    </div>
+
+    <div class="col-6" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <a  class="card-link" href="#">
+      <div class="card text-center" style="min-height: 20vh; padding: 20px;">
+        <iframe src="https://lottie.host/?file=a4bfd3cf-5957-4f5d-8310-3e44a0518f18/79U3ITL1sP.json"></iframe>
+
+        <div class="card-body">
+          Sponsor
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<router-outlet name="app-footer"></router-outlet>

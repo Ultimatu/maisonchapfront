@@ -1,1 +1,79 @@
-<p>account-activation works!</p>
+<div class="container-fluid bg-dark">
+  <header class="d-flex flex-wrap align-items-center justify-content-center mt-1 py-3 mb-4 border-bottom" style="min-height:100px">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-white text-decoration-none" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <img src="assets/maison/logo_img.png" class="bi me-2" width="40" height="32" role="img" alt="">
+      <span class="fs-4">Maison Chap</span>
+    </a>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <li><a mat-raised-button color="basic" href="/" class="nav-link link-light fs-2">Home</a></li>
+    </ul>
+
+
+  </header>
+</div>
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-lg-5 py-5" *ngIf="!isLoading && displayForm" >
+    <div class="col-lg-7 text-center text-lg-start" data-aos="fade-up" data-aos-duration="25">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Activation</h1>
+      <p class="col-lg-10 fs-4">
+        <iframe src="https://lottie.host/?file=e8a53934-a16b-41b9-95b6-bc59112afe1a/slVSzpcmJ0.json"
+                width="300" height="300" frameborder="0" style="border: none;" loading="lazy"></iframe>
+      </p>
+      <p class="text-center">
+        Veillez à bien saisir le code que vous avez reçu par mail ou cliquez sur le lien que vous avez reçu.
+      </p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="activationError">
+        Une erreur s'est produite. Veuillez réessayer.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <form class="p-4 p-md-5 border rounded-3 bg-light" (ngSubmit)="activate()" [formGroup]="activateForm">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="code" name="code" placeholder="code" formControlName="code">
+          <label for="code">Code</label>
+          <div *ngIf="activateForm.get('code')?.invalid && (activateForm.get('code')?.touched || activateForm.get('code')?.dirty)"
+               class="text-danger">
+            Le code est requis.
+          </div>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Activer</button>
+
+      </form>
+      <!-- Compte à rebours -->
+      <div *ngIf="!isExpired" class="text-center">
+        <p class="badge bg-secondary text-wrap">
+          Temps restant : {{ countdown | formatCountdown }}
+        </p>
+      </div>
+    </div>
+     <hr>
+  </div>
+  <!-- Bouton de régénération du token -->
+  <button *ngIf="isExpired || displayResendButton" class="w-100 btn btn-lg btn-danger" (click)="regenerateToken()">Régénérer le code</button>
+
+  <div class="container text-center" *ngIf="displaySuccessMessage()" style="min-height: 60vh; margin-bottom:auto;">
+    <div>
+      <!-- Message en haut -->
+      <p class="alert alert-success">Félicitations, votre compte a été activé avec succès !</p>
+    </div>
+    <div>
+      <!-- Animation au milieu -->
+      <iframe src="https://lottie.host/?file=17352df3-f0a8-4d92-93cd-00c60ca84063/Lrtmgrxh8N.json"
+               frameborder="0" style="border: none;" loading="lazy"></iframe>
+    </div>
+    <div>
+      <!-- Bouton en bas -->
+      <button (click)="goToLogin()" class="btn btn-outline-success">Se connecter</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center h-100" style="margin-top: 20vh; height:80vh;" >
+  <iframe width="500" height="500" frameborder="0" style="border: none;" loading="lazy" src="https://lottie.host/?file=485eb509-f751-40c2-9517-940cc06f096b/wRgREtdj19.json" class="img-fluid"></iframe>
+
+</div>
+
+<router-outlet name="app-footer"></router-outlet>

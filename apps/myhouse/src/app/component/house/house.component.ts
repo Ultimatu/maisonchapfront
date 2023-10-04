@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductServiceService } from '../../services/product-service.service';
-import {House} from "../../services/models";
+import {House} from "../../services/model/models";
 
 @Component({
   selector: 'app-house',
@@ -8,7 +8,7 @@ import {House} from "../../services/models";
   styleUrls: ['./house.component.css']
 })
 export class HouseComponent implements OnInit {
-  layout: "list" | "grid" = "grid";
+  layout: "grid" = "grid";
   houses: House[] = [];
   newHouseList: House[] = [];
   baseUrl = 'http://localhost:8080/down/';

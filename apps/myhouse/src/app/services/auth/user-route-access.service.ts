@@ -17,6 +17,7 @@ export class UserRouteAccessService {
         if (account) {
           const authorities = route.data['authorities'];
 
+          console.log("authorities", authorities);
           if (!authorities || authorities.length === 0 || this.accountService.hasAnyAuthority(authorities)) {
             return true;
           }

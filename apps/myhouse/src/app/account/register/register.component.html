@@ -1,1 +1,103 @@
-<p>register works!</p>
+<div class="container-fluid bg-dark">
+  <header class="d-flex flex-wrap align-items-center justify-content-center mt-1 py-3 mb-4 border-bottom" style="min-height:100px">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-white text-decoration-none" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <img src="assets/maison/logo_img.png" class="bi me-2" width="40" height="32" role="img" alt="">
+      <span class="fs-4">Maison Chap</span>
+    </a>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" data-aos-once="true" data-aos-anchor-placement="top-bottom" data-aos-easing="ease-in-out">
+      <li><a mat-raised-button color="basic" href="/" class="nav-link link-light fs-2">Home</a></li>
+    </ul>
+
+
+  </header>
+</div>
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5" *ngIf="!isLoading">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start" data-aos="fade-up" data-aos-duration="25">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Veuillez entrer vos informations</h1>
+      <p class="col-lg-10 fs-4">
+        <iframe src="https://lottie.host/?file=92e36808-918f-4f16-8bee-2db214e849ac/DrgIMjPdjk.json"
+                width="300" height="300" frameborder="0" style="border: none;" loading="lazy"></iframe>
+      </p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="registerError">
+        <strong>Erreur !</strong> {{ErrorMessage}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <form class="p-4 p-md-5 border rounded-3 bg-light" (ngSubmit)="register()" [formGroup]="registerForm">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" formControlName="nom" (input)="validateInput('nom')">
+          <label for="nom">Nom</label>
+          <div *ngIf="registerForm.get('nom')?.invalid && (registerForm.get('nom')?.touched || registerForm.get('nom')?.dirty)"
+               class="text-danger">
+            Le nom est requis.
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" formControlName="prenom" (input)="validateInput('prenom')">
+          <label for="prenom">Prénom</label>
+          <div *ngIf="registerForm.get('prenom')?.invalid && (registerForm.get('prenom')?.touched || registerForm.get('prenom')?.dirty)"
+               class="text-danger">
+            Le prénom est requis.
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Votre adresse" formControlName="adresse" (input)="validateInput('adresse')">
+          <label for="prenom">Adresse</label>
+          <div *ngIf="registerForm.get('adresse')?.invalid && (registerForm.get('adresse')?.touched || registerForm.get('adresse')?.dirty)"
+               class="text-danger">
+            L'adresse est requise.
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email address" formControlName="email" (input)="validateInput('email')">
+          <label for="email">Email address</label>
+          <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)"
+               class="tex t-danger">
+            L'adresse email est requise et doit être au bon format.
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" formControlName="phone" (input)="validateInput('phone')">
+          <label for="phone">Phone</label>
+          <div *ngIf="registerForm.get('phone')?.invalid && (registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty)"
+               class="text-danger">
+            Le numéro de téléphone est requis.
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" formControlName="password">
+          <label for="password">Password</label>
+          <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)"
+               class="text-danger">
+            Entrez un mot de passe d'au moins 8 caractères, avec au moins une lettre majuscule, une lettre minuscule et un chiffre.
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"
+                 formControlName="confirmPassword" (input)="validatePasswordConfirmation()">
+          <label for="confirmPassword">Confirm Password</label>
+          <div *ngIf="registerForm.get('confirmPassword')?.hasError('mismatch')" class="text-danger">
+            Les mots de passe ne correspondent pas.
+          </div>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">S'inscrire</button>
+        <hr>
+        <small class="text-muted">Vous avez déjà un compte ? <a href="/login">Connectez-vous</a></small>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center h-100" style="margin-top: 100px; min-height:60vh">
+  <iframe width="500" height="500" frameborder="0" style="border: none;" loading="lazy" src="https://lottie.host/?file=485eb509-f751-40c2-9517-940cc06f096b/wRgREtdj19.json" class="img-fluid"></iframe>
+
+</div>
+
+
+
+
+<router-outlet name="app-footer"></router-outlet>

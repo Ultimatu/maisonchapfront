@@ -10,19 +10,21 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {NgIf} from "@angular/common";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
-  imports: [
-    RouterModule.forChild([LOGIN_ROUTE]),
-    SharedModule,
-    ReactiveFormsModule,
-    MatRadioModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    NgIf
+    imports: [
+        RouterModule.forChild([LOGIN_ROUTE]),
+        SharedModule,
+        ReactiveFormsModule,
+        MatRadioModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        NgIf,
+        MatProgressBarModule
 
-  ],
+    ],
   declarations: [LoginComponent],
   exports: [
     LoginComponent

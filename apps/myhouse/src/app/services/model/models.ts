@@ -56,6 +56,7 @@ export interface User {
   photoPath: string;
   username: string;
   role: string;
+  adresse: string;
   accountNonLocked: string;
 }
 

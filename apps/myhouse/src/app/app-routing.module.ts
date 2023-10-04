@@ -7,12 +7,12 @@ import {Authority} from "./services/constants/authority-constant";
 import {UserRouteAccessService} from "./services/auth/user-route-access.service";
 import {errorRoute} from "./layouts/error/error.route";
 import {MainComponent} from "./layouts/main/main.component";
-import {navbarRoute} from "./layouts/navbar/navbar.route";
 import {FooterComponent} from "./layouts/footer/footer.component";
 import {HouseComponent} from "./component/house/house.component";
-import {LoginComponent} from "./login/login.component";
-import {SidenavComponent} from "./admin/sidenav/sidenav.component";
-import {DashboardComponent} from "./admin/dashboard/dashboard.component";
+import {GuestGuard} from "./services/auth/guards/guest-gard.service";
+import {OnlyUserGuard} from "./services/auth/guards/only-user-guard.service";
+import {LogoutComponent} from "./component/logout/logout.component";
+import {HouseDetailComponent} from "./component/house-detail/house-detail.component";
 
 @NgModule({
   imports: [
@@ -27,16 +27,30 @@ import {DashboardComponent} from "./admin/dashboard/dashboard.component";
           canActivate: [UserRouteAccessService],
           loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
         },
+          {
+              path: 'proprio',
+              data: {
+                  authorities: [Authority.FREE_PROPRIO, Authority.PREMIUM_PROPRIO, Authority.STANDARD_PROPRIO],
+              },
+              canActivate: [UserRouteAccessService],
+              loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule),
+
+
+          },
         {
+          canActivate: [GuestGuard],
           path: 'account',
           loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
         },
 
         {
+          canActivate: [GuestGuard],
           path: 'login',
           loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
         },
         {
+
+          canActivate: [OnlyUserGuard],
           path: '',
           component: MainComponent,
           children: [
@@ -53,12 +67,33 @@ import {DashboardComponent} from "./admin/dashboard/dashboard.component";
             {
               path: '',
               component: HouseComponent
-
-            }
+            },
+            {
+              path: 'house:id',
+              component: HouseDetailComponent
+            },
+            {
+              path: 'house:userId',
+              component: HouseDetailComponent
+            },
+            {
+              path: 'house/reserve:id',
+              component: HouseDetailComponent
+            },
 
           ],
+
         },
-        ...errorRoute,
+
+        {
+          path: 'logout',
+          component: LogoutComponent
+        },
+        {
+          path: '**',
+          redirectTo: '',
+        }
+        //...errorRoute,
       ],
     ),
   ],

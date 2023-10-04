@@ -23,7 +23,6 @@ export class INewUser {
   password?: string | null;
   role?: string | null;
   langkey?: string | null;
-  active?: boolean | null;
   photoPath?: string | null;
 }
 export class User implements IUser {

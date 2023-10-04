@@ -37,11 +37,37 @@
 
     <div class="col-md-3 text-end" *ngIf="!isAuthenticated()">
       <button type="button" class="btn btn-outline-light me-2" routerLink="/login">Login </button>
-      <button type="button" class="btn btn-warning">Sign-up</button>
+      <button type="button" class="btn btn-warning" routerLink="/account">Sign-up</button>
     </div>
     <div class="col-md-3 text-end" *ngIf="isAuthenticated()">
-        <button type="button" mat-raised-button color="primary" routerLink="/profile">Profile</button>
-      <button type="button" mat-raised-button color="warn" (click)="logout()">Logout</button>
+
+
     </div>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngIf="isAuthenticated()">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle px-2 link-light"
+          href="#"
+          id="profileDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{account?.prenom + ' ' + account?.nom}}
+          <span class="material-icons">account_circle
+          </span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="profileDropdown">
+          <a class="dropdown-item" routerLink="/profile"
+          >Profile</a
+          >
+          <a class="dropdown-item" routerLink="/settings"
+          >Settings</a
+          >
+          <a class="dropdown-item" routerLink="/logout">Logout</a>
+        </div>
+      </li>
+    </ul>
+
   </header>
 </div>

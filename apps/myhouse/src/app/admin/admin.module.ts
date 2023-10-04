@@ -11,8 +11,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
-
-
+import {LogoutComponent} from "../component/logout/logout.component";
 
 @NgModule({
   declarations: [SidenavComponent, DashboardComponent],
@@ -23,7 +22,16 @@ import {MatGridListModule} from "@angular/material/grid-list";
       children: [
         {
           path: 'dashboard',
-          component: DashboardComponent
+          component: DashboardComponent,
+        },
+        {
+          path: 'house',
+          component: DashboardComponent,
+
+        },
+        {
+          path: 'logout',
+          component: LogoutComponent
         }
       ],
       data: {

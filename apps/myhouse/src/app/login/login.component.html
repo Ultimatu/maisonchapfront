@@ -1,13 +1,14 @@
-<div class="container col-xl-10 col-xxl-8 px-4 py-5" >
+<div class="container col-xl-10 col-xxl-8 px-4 py-5" *ngIf="!isLoading">
   <div class="row align-items-center g-lg-5 py-5">
     <div class="col-lg-7 text-center text-lg-start" data-aos="fade-up" data-aos-duration="25">
       <h1 class="display-4 fw-bold lh-1 mb-3"
       >Veuillez entrer vos informations</h1>
       <p class="col-lg-10 fs-4" >
-        <img src="assets/maison/logo_img.png" alt="">
+        <iframe src="https://lottie.host/?file=75ece7ac-8b6c-4568-a31f-f568f7fc37c3/1Pk9MhVHwU.json"
+                width="300" height="300" frameborder="0" style="border: none;" loading="lazy"></iframe>
       </p>
     </div>
-    <div class="col-md-10 mx-auto col-lg-5" *ngIf="!isLoading">
+    <div class="col-md-10 mx-auto col-lg-5">
 
       <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="authenticationError">
         Une erreur s'est produite. Veuillez réessayer.
@@ -17,33 +18,39 @@
 
       <form class="p-4 p-md-5 border rounded-3 bg-light" (ngSubmit)="login()" [formGroup]="loginForm">
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" formControlName="email">
           <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password" formControlName="password">
           <label for="floatingPassword">Password</label>
         </div>
         <div class="checkbox mb-3">
           <label>
-          <mat-checkbox color="accent" formControlName="rememberMe">Remember me</mat-checkbox>
+          <mat-checkbox  formControlName="rememberMe">Remember me</mat-checkbox>
           </label>
 
 
         </div>
-        <button mat-flat-button color="accent" class="w-100 btn btn-lg" type="submit">Login</button>
+        <button mat-flat-button color="primary" class="w-100 btn btn-lg" type="submit">Login</button>
         <hr class="my-4">
         <!--link to recovery and register-->
         <small class="text-muted">Vous avez oublié votre mot de passe ? <a routerLink="/account/recovery-password">Récupérez-le</a></small>
         <hr class="my-4">
 
-        <small class="text-muted">Vous n'avez pas de compte ? <a routerLink="/account/signup">Inscrivez-vous</a></small>
+        <small class="text-muted">Vous n'avez pas de compte ? <a routerLink="/account">Inscrivez-vous</a></small>
 
       </form>
     </div>
-    <div class="col-md-10 mx-auto col-lg-5" *ngIf="isLoading">
-       Loading...
-    </div>
+
   </div>
 </div>
+
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center h-100" style="margin-top: 20vh">
+  <iframe width="500" height="500" frameborder="0" style="border: none;" loading="lazy" src="https://lottie.host/?file=5e54babc-401b-4f64-9df8-b3567f41797b/Hs0PcZUHLV.json" class="img-fluid"></iframe>
+
+
+</div>
+
+
 

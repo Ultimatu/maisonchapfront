@@ -8,12 +8,15 @@ import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { Account } from './account.model';
 import {StateStorageService} from "./stat-storage.service";
 import {AUTH_BASE_URL, BASE_URL, USER_BASE_URL} from "../constants/constant";
+import {INewUser} from "../../entities/user/user";
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  private userIdentity: Account | null = null;
+  userIdentity: Account | null = null;
   private authenticationState = new ReplaySubject<Account | null>(1);
   private accountCache$?: Observable<Account> | null;
+  isMailSent$ : boolean = false;
+  mailPending$ : string | null | undefined = '';
 
   constructor(
     private sessionStorageService: SessionStorageService,
@@ -22,7 +25,7 @@ export class AccountService {
     private router: Router,
   ) {}
 
-  save(account: Account): Observable<{}> {
+  save(account: INewUser): Observable<{}> {
     return this.http.post(AUTH_BASE_URL+"/register", account);
   }
 
@@ -34,6 +37,7 @@ export class AccountService {
     }
   }
 
+
   hasAnyAuthority(authorities: string[] | string): boolean {
     if (!this.userIdentity) {
       return false;
@@ -41,8 +45,15 @@ export class AccountService {
     if (!Array.isArray(authorities)) {
       authorities = [authorities];
     }
-    return this.userIdentity.authorities.some((authority: string) => authorities.includes(authority));
+    console.log("hasAnyAuthority", authorities);
+    console.log(this.userIdentity.authorities);
+
+    // Extraire les valeurs d'autorité de userIdentity.authorities
+    const userAuthorities = this.userIdentity.authorities.map(auth => auth.authority);
+    return authorities.some((authority: string) => userAuthorities.includes(authority));
   }
+
+
 
 
 
@@ -95,5 +106,37 @@ export class AccountService {
       })
     );
   }
+
+  setMailSent(isMailSent: boolean) {
+    this.isMailSent$ = isMailSent;
+  }
+
+  isMailSent() {
+    return this.isMailSent$;
+  }
+
+
+
+    activateAccountWithCode(code: string, email: string): Observable<{}> {
+      return this.http.get(AUTH_BASE_URL + "/act-with-code", {params: {code, email}});
+    }
+
+    regenerateCode(email: string): Observable<{}> {
+      return this.http.get(AUTH_BASE_URL + "/regenerate-code", {params: {email}});
+    }
+
+    checkIfAccountActivated(email: string): Observable<{}> {
+      return this.http.get(AUTH_BASE_URL + "/check-if-account-activated", {params: {email}});
+    }
+
+  storeMailPending(email: string | null | undefined) : void  {
+      this.mailPending$ = email;
+    }
+
+    getMailPending() : string  | null | undefined{
+      return this.mailPending$;
+    }
+
+
 
 }

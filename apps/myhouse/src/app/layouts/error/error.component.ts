@@ -13,7 +13,6 @@ export class ErrorComponent {
   ) {}
 
   ngOnInit(): void {
-    // Démarrez un délai de 3 secondes (3000 millisecondes) pour fermer automatiquement la boîte de dialogue
     setTimeout(() => {
       this.dialogRef.close();
     }, 3000);

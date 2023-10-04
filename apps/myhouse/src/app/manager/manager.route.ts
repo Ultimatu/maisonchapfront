@@ -1,10 +1,17 @@
 import { Route } from '@angular/router';
-import {ManagerComponent} from "./manager.component";
+import {DashboardProprioComponent} from "./dashboard-proprio/dashboard-proprio.component";
+import {SidebarProprioComponent} from "./sidebar-proprio/sidebar-proprio.component";
 
 
 export const MANAGER_ROUTE: Route = {
   path: '',
-  component: ManagerComponent,
+  component: SidebarProprioComponent,
+  children: [
+    {
+      path: 'dashboard',
+      component: DashboardProprioComponent,
+    },
+  ],
   data: {
     pageTitle: 'proprio page',
   },

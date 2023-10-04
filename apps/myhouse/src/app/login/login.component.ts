@@ -45,12 +45,14 @@ export class LoginComponent implements OnInit{
       next: () => {
         this.authenticationError = false;
         this.accountService.getMyDatas().subscribe((userData) => {
-          if (userData && userData.role === Authority.ADMIN) {
-            this.router.navigate(['admin']).then((r) => console.log(r));
-          }else if (userData && userData.role?.includes("PROPRIO")){
-            this.router.navigate(['manager']).then((r) => console.log(r));
+          console.log(userData);
+          if (userData && userData.role === "ADMIN") {
+            this.router.navigate(['admin/dashboard']).then((r) => console.log(r));
+          }else if (userData && userData.role === Authority.FREE_PROPRIO || userData && userData.role === Authority.PREMIUM_PROPRIO || userData && userData.role === Authority.STANDARD_PROPRIO) {
+            this.router.navigate(['proprio']).then((r) => console.log(r));
           }
           else {
+            console.log("else");
             this.router.navigate(['']).then((r) => console.log(r));
           }
         });
